@@ -25,3 +25,15 @@ usethis::git_sitrep()
 # • Email: 'guilherme.s.militao@gmail.com'
 # • Personal access token for 'https://github.com': '<discovered>'
 
+# Para fazer o Git acompanhar a pasta do projeto aberto atualmente:
+usethis::use_git()
+
+# para usar o GITHUB
+# Primeiro é necessário ir na aba "Git" do Rstudio, selecionar as pastas a serem
+# acompanhadas e clicar em commit. Na tela em que aparece no Rstudio, é necessário
+# apenas incluir uma observação sobre a commit e clicar no botão commit.
+# Depois disso:
+
+usethis::use_github()
+
+
