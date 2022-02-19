@@ -1,0 +1,225 @@
+---
+title: "Primeiro relatório - exemplos"
+author: "Guilherme J S Militão"
+date: "07/02/2022"
+#output: html_document
+#output: word_document
+output:
+  prettydoc::html_pretty:
+    theme: architect
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Informações aula 2
+
+### Dicas sobre formatação
+
+#### Negrito ou itálico
+
+**texto em negrito**, entre dois asteriscos. Para *itálico*, um asterisco.  
+
+#### Lista não numerada
+
+usar o traço "-"
+
+- Item 1
+- Item 2
+
+#### Para incluir texto em formato de citação
+
+Para incluir texto em formato de citação, recuado, usar ">" no início da frase:
+
+> Assim falou zaratustra. 
+
+#### Links e imagens
+
+* LINKS
+
+A estrutura de links é uso de colchetes seguido de parêntesis. Exemplo de link do curso de extensão: [Clique aqui - Extensão USP](https://cursosextensao.usp.br/)
+
+* IMAGENS
+
+Para imagem só é necessário incluir um `!` antes da sintaxe `[]("link para a imagem")`, usando o link de uma imagem da Internet.
+
+Para definir a posição de uma imagem (se centralizada, por exemplo), sua largura ou para inclusão de legendas, utilizamos as opções do chunk. 
+
+a. `out.width = "30%"` - Largura da imagem
+
+b. `fig.align = 'center'` - Alinhamento da imagem
+
+c. `fig.cap="Logo R"` - Legenda da imagem
+
+
+
+#### Para itens numerados:
+
+Começar a contagem com o número que se quer. A partir daí, repetir o número. Quando clicamos em Knit, os demais números depois do primeiro ficam na ordem:
+
+2. Item começando com 2
+2. Segundo item: 3
+2. Terceiro item: 4
+
+### Incluindo chunks de códigos
+
+Existe um atalho do teclado para criar chunks no RStudio: `Ctrl + ALt + I`
+
+Várias opções:
+
+- código aparece, mas não é executado `eval=FALSE`
+- código não aparece, mas é executado (só resultados aparecem) `echo=FALSE`
+- warnings não aparecem: `warning=FALSE`, `message=FALSE` 
+- código não aparece e é executado: `include=FALSE`
+- outras...
+
+Também é possível clicar na roda dentada de cada chunk para definir algumas configurações usando botões. 
+
+> Referência: [Reference Guide R Markdown](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)
+
+
+### Criando arquivos com referência dinâmica - Prática aula 2
+
+```{r pacotes, include=F}
+
+library(tidyverse)
+library(fs)
+library(here)
+
+```
+
+Duas opções de leitura de arquivo:
+
+* Usando função `../` - lê a partir da pasta que está acima do work directory. 
+
+
+```{r message=FALSE, warning=FALSE}
+
+caminho_1 <- "../dados/pinguins.csv"
+pinguins <- readr::read_csv(file = caminho_1)
+glimpse(pinguins)
+
+
+
+```
+
+* Usando função `here::here` - lê a partir da pasta do work directory. Ela traz o caminho absoluto como resultado de uma função. Portanto, o código fica com referência dinâmica
+
+
+```{r message=FALSE, warning=FALSE}
+
+caminho_2 <- here::here("dados", 'pinguins.csv')
+pinguins_2 <- readr::read_csv(file = caminho_2)
+glimpse(pinguins_2)
+
+```
+
+#### Opções globais de Chunk
+
+É possível configurar todos os chunks do relatório de uma vez. Possível fazer isso configurando o primeiro chunk do arquivo e colocando a função `knitr::opts_chunk$set(...)` dentro.
+
+
+#### Código inline
+
+Exemplo de código inline usando a base do pinguins:
+
+```{r exemplo codigo inline, echo=FALSE, message=FALSE, warning=FALSE}
+
+vetor_especies <- knitr::combine_words(unique(pinguins$especie), and = "e ")
+vetor_anos <- knitr::combine_words(unique(pinguins$ano), and = "e ")
+vetor_ilhas <- knitr::combine_words(unique(pinguins$ilha), and = "e ")
+peso_medio <- round(mean(pinguins$massa_corporal, na.rm = T)/1000, 2)
+  
+```
+
+
+
+A base de dados pinguins apresenta dados referente à `r nrow(pinguins)` pinguins, das seguintes espécies: `r vetor_especies`. Os dados foram coletados entre os anos `r vetor_anos`, nas seguintes ilhas: `r vetor_ilhas`. O peso médio dos pinguins amostrados foi de `r peso_medio` kg. Os dados foram obtidos através do pacote Palmer Penguins.
+
+
+#### Inclusão de tabelas
+
+Beatriz recomendou o `reacttable::reacttable()`. Não vem 'pronto' como a tabela formatada no `DT::datatable`, mas é mais versátil.
+
+No slide, Beatriz usou `knitr::kable()`.
+
+### Tarefa aula 2
+
+#### Adicionar imagens
+
+Utilizando R, adicione as seguintes imagens. Deixe-as centralizadas, sem que apareça o código, e ocupando 80% da largura da página:
+
+a) Utilize a URL - usando o Markdown: [https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png](https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png)
+
+![](https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png)
+
+b) Utilize a URL: [https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png](https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png)
+
+Usando a função `knitr::include_graphics()`
+
+```{r echo = FALSE, out.width = "80%", fig.align = 'center'}
+
+knitr::include_graphics("https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png")
+
+```
+
+
+
+c) Na pasta inicial do projeto, crie uma pasta chamada img/. Nesta pasta, salve a imagem, e adicione a imagem no relatório utilizando caminhos relativos: https://allisonhorst.github.io/palmerpenguins/reference/figures/logo.png
+
+```{r tarefa aula 2 Exercício B, echo=FALSE, out.width="80%", fig.align = 'center'}
+
+# usando a função ../:
+
+logo_pinguins <- "../img/logo_pinguins.png"
+
+knitr::include_graphics(logo_pinguins)
+
+
+```
+
+
+#### Adicionar uma tabela
+
+1) Adicione a seguinte tabela no seu relatório, usando a função kable():
+
+```{r tarefa aula 2 Exercício C}
+
+quantidade_de_especies <- pinguins |> 
+  dplyr::count(especie, sort = T)|>
+  janitor::adorn_totals()
+
+```
+
+Tabela:
+
+```{r tarefa aula 2 Exercício C c2, echo=FALSE}
+
+knitr::kable(quantidade_de_especies, col.names = c("Espécie", "Quantidade"))|>
+  kableExtra::kable_styling(full_width = F)
+
+```
+
+
+## Aula 3
+
+### Criação de PDF a partir do relatório HTML:
+`pagedown::chrome_print("primeiro-relatorio.html")`
+
+### Edição do estilo do relatório HTML
+
+É possível incluir a função `prettydoc::html_pretty:` no YAML. Incluindo como tema, por exemplo: cayman, tactile, architect, leonids, hpstr.
+
+`output:
+  prettydoc::html_pretty:
+    theme: architect`
+
+Implementei no início do relatório. 
+
+Dica: [Pacote pagedown](https://rstudio.github.io/pagedown/)
+
+
+### Word com template preparado por você mesmo:
+
+Post do curso R: [Preparar template de word para Rmarkdown](https://blog.curso-r.com/posts/2021-12-23-word-rmarkdown)
