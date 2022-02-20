@@ -1,0 +1,83 @@
+---
+title: "Aula 2"
+author: "Guilherme J S Militão"
+date: "07/02/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+
+#### Negrito ou itálico
+
+**texto em negrito**, entre dois asteriscos. Para *itálico*, um asterisco.  
+
+#### Lista não numerada
+
+usar o traço "-"
+
+- Item 1
+- Item 2
+
+#### Para incluir texto em formato de citação
+
+Para incluir texto em formato de citação, recuado, usar ">" no início da frase:
+
+> Assim falou zaratustra. 
+
+#### Links e imagens
+
+A estrutura de links é uso de colchetes seguido de parêntesis. Exemplo de link do curso de extensão: [Clique aqui - Extensão USP](https://cursosextensao.usp.br/)
+
+Para imagem é a mesma coisa, mas usando o link de uma imagem da Internet.
+
+#### Para itens numerados:
+
+Começar a contagem com o número que se quer. A partir daí, repetir o número. Quando clicamos em Knit, os demais números depois do primeiro ficam na ordem:
+
+2. Item começando com 2
+2. Segundo item: 3
+2. Terceiro item: 4
+
+### Incluindo chunks de códigos
+
+Existe um atalho do teclado para criar chunks no RStudio: `Ctrl + ALt + I`
+
+Várias opções:
+
+- código aparece, mas não é executado `eval=FALSE`
+- código não aparece, mas é executado (só resultados aparecem) `echo=FALSE`
+- warnings não aparecem: `warning=FALSE`, `message=FALSE` 
+- código não aparece e é executado: `include=FALSE`
+- outras...
+
+Também é possível clicar na roda dentada de cada chunk para definir algumas configurações usando botões. 
+
+> Referência: [Reference Guide R Markdown](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)
+
+
+### Criando arquivos com referência dinâmica
+
+```{r pacotes, include=F}
+
+library(tidyverse)
+
+```
+
+
+
+```{r}
+
+# duas opções de leitura de caminho, usando '../' ou função do pacote here
+
+caminho <- "../dados/pinguins.csv"
+pinguins <- readr::read_csv(file = caminho)
+glimpse(pinguins)
+
+```
+
+
