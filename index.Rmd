@@ -1,0 +1,58 @@
+---
+title: "Curso de Verão IME-USP 2022 - Relatórios reprodutíveis em R"
+author: "Guilherme J S Militão"
+date: "20/02/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+**Estão listados aqui os documentos criados durante as aulas do curso.**
+
+
+#### Scripts R
+
+```{r scripts}
+
+tibble::tibble(
+  arquivo = list.files("R/", pattern = ".R"),
+url = paste0("https://github.com/gmilitao/parte-pratica-curso-de-verao-relatorios/blob/master/R/", arquivo)
+) |> 
+  knitr::kable()
+
+
+```
+
+
+#### Arquivos .rmd
+
+```{r arquivos rmd}
+
+tibble::tibble(
+  arquivo = list.files("relatorio/", pattern = ".Rmd"),
+url = paste0("https://github.com/gmilitao/parte-pratica-curso-de-verao-relatorios/blob/master/relatorio/", arquivo)
+) |> 
+  knitr::kable()
+
+```
+
+
+
+#### Relatórios em html
+
+```{r relatorios html}
+
+tibble::tibble(
+  arquivo = list.files("relatorio/", pattern = ".html"),
+url = paste0("https://gmilitao.github.io/parte-pratica-curso-de-verao-relatorios/relatorio/", arquivo)
+) |> 
+  knitr::kable()
+
+```
+
+
+
+
