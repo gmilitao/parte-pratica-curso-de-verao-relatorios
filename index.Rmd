@@ -1,0 +1,60 @@
+---
+title: "Documentos do curso Relatórios reprodutíveis com R"
+date: "20/02/2022"
+output:
+  rmdformats::robobook:
+    self_contained: true
+    default_style: "light"
+    downcute_theme: "default"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+<br>
+**Estão listados aqui os documentos criados durante as aulas do curso Relatórios Reprodutíveis em R, que fez parte dos cursos de verão de 2022 do IME-USP, e foi ministrado por [Beatriz Milz](https://beatrizmilz.com/).**
+<br>
+
+#### Scripts R
+
+```{r scripts}
+
+tibble::tibble(
+  arquivo = list.files("R/", pattern = ".R"),
+url = paste0("https://github.com/gmilitao/parte-pratica-curso-de-verao-relatorios/blob/master/R/", arquivo)
+) |> 
+  knitr::kable()
+
+
+```
+
+
+#### Arquivos .rmd
+
+```{r arquivos rmd}
+
+tibble::tibble(
+  arquivo = list.files("relatorio/", pattern = ".Rmd"),
+url = paste0("https://github.com/gmilitao/parte-pratica-curso-de-verao-relatorios/blob/master/relatorio/", arquivo)
+) |> 
+  knitr::kable()
+
+```
+
+
+
+#### Relatórios em html
+
+```{r relatorios html}
+
+tibble::tibble(
+  arquivo = list.files("relatorio/", pattern = ".html"),
+url = paste0("https://gmilitao.github.io/parte-pratica-curso-de-verao-relatorios/relatorio/", arquivo)
+) |> 
+  knitr::kable()
+
+```
+
+
+
+
