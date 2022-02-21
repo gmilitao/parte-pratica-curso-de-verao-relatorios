@@ -1,5 +1,5 @@
 ---
-title: "Documentos do curso Relatórios reprodutíveis com R"
+title: "Documentos do curso Relatórios Reprodutíveis com R"
 date: "20/02/2022"
 output:
   rmdformats::robobook:
