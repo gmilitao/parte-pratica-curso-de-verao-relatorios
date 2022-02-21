@@ -1,17 +1,15 @@
 ---
-title: "Curso de Verão IME-USP 2022 - Relatórios reprodutíveis em R"
-author: "Guilherme J S Militão"
-date: "20/02/2022"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-
+## Curso de Verão IME-USP 2022 - Relatórios reprodutíveis em R
+<br>
 **Estão listados aqui os documentos criados durante as aulas do curso.**
-
+<br>
 
 #### Scripts R
 
